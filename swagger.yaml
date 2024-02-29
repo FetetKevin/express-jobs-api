@@ -1,0 +1,248 @@
+openapi: 3.0.0
+info:
+  title: Jobs_api
+  contact: {}
+  version: '1.0'
+jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
+servers:
+  - url: localhost:3000/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: POST register
+      operationId: POSTregister
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/POSTregisterRequest'
+                - examples:
+                    - name: aoaoa
+                      email: aoaoa@gmail.com
+                      password: '1234'
+              contentMediaType: application/json
+            example:
+              name: aoaoa
+              email: aoaoa@gmail.com
+              password: '1234'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: POST login
+      operationId: POSTlogin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/POSTloginRequest'
+                - examples:
+                    - email: azerty@gmail.com
+                      password: '1234'
+              contentMediaType: application/json
+            example:
+              email: azerty@gmail.com
+              password: '1234'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /jobs:
+    get:
+      tags:
+        - Jobs
+      summary: GET all jobs
+      operationId: GETalljobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Jobs
+      summary: POST job
+      operationId: POSTjob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/POSTjobRequest'
+                - examples:
+                    - company: test
+                      position: posiiton
+              contentMediaType: application/json
+            example:
+              company: test
+              position: posiiton
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    parameters: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+        - Jobs
+      summary: GET unique job
+      operationId: GETuniquejob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Jobs
+      summary: DELETE job
+      operationId: DELETEjob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Jobs
+      summary: PATCH job
+      operationId: PATCHjob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/PATCHjobRequest'
+                - examples:
+                    - company: jhon company
+                      position: fullstack dev
+              contentMediaType: application/json
+            example:
+              company: jhon company
+              position: fullstack dev
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    parameters: []
+components:
+  schemas:
+    POSTregisterRequest:
+      title: POSTregisterRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      examples:
+        - name: aoaoa
+          email: aoaoa@gmail.com
+          password: '1234'
+    POSTloginRequest:
+      title: POSTloginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      examples:
+        - email: azerty@gmail.com
+          password: '1234'
+    POSTjobRequest:
+      title: POSTjobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      examples:
+        - company: test
+          position: posiiton
+    PATCHjobRequest:
+      title: PATCHjobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      examples:
+        - company: jhon company
+          position: fullstack dev
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ''
+  - name: Jobs
+    description: ''
